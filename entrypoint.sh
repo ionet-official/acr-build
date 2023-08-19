@@ -19,5 +19,4 @@ az login --service-principal -u ${INPUT_SERVICE_PRINCIPAL} -p ${INPUT_SERVICE_PR
 echo "Sending build job to ACR.."
 echo "az acr build -r ${INPUT_REGISTRY} ${BUILD_ARGS} -f ${INPUT_DOCKERFILE} -t ${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG} ${INPUT_FOLDER}"
 cd ${INPUT_FOLDER}
-ls
 az acr build -r ${INPUT_REGISTRY} ${BUILD_ARGS} -f ${INPUT_DOCKERFILE} -t ${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG} .
