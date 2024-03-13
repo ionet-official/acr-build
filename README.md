@@ -1,4 +1,4 @@
-# Build images with Azure Container Registry
+# Build images with Azure Container Registry (From local)
 
 This action can be used to build containers using an Azure Container Registry. 
 
