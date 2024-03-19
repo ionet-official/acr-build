@@ -1,4 +1,4 @@
-# Build images with Azure Container Registry (From local)
+# Build images with Azure Container Registry
 
 This action can be used to build containers using an Azure Container Registry. 
 
@@ -13,6 +13,8 @@ Following the capabilities of this action:
 - **Default tag:** The action will default to use the first 8 characters of the commit SHA if no tag is specified
 
 - **Private repositories:**: It is possible to use private Github repositories by providing a `github_token`
+
+- **Building with local context**: Specify `local` as `github_token` to get a container built from local context instead of Github repository
 
 ## Action inputs:
 
@@ -63,7 +65,7 @@ Following the capabilities of this action:
 
   <tr>
     <td><code>git_access_token</code><br/></td>
-    <td>(Optional) The Github access token for private repositories</td>
+    <td>(Optional) The Github access token for private repositories, or <tt>local</tt> to build from currently checked out (and potentially modified) context</td>
     <td><code>GITHUB_SHA::8</code></td>
   </tr>
 
