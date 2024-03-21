@@ -15,8 +15,7 @@ fi
 
 if [ "$INPUT_GIT_ACCESS_TOKEN" = "local" ]; then
         echo "Building Docker image ${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG} from local using context ${INPUT_FOLDER} ; and pushing it to ${INPUT_REGISTRY} Azure Container Registry"
-        cd ${INPUT_FOLDER}
-        BUILD_URI="."
+        BUILD_URI="${INPUT_FOLDER}"
 else
         if [ -n "$INPUT_GIT_ACCESS_TOKEN" ]; then
                 GIT_ACCESS_TOKEN_FLAG="${INPUT_GIT_ACCESS_TOKEN}@"
@@ -26,7 +25,7 @@ else
 fi
 
 echo "Logging into azure.."
-az login --service-principal -u ${INPUT_SERVICE_PRINCIPAL} -p ${INPUT_SERVICE_PRINCIPAL_PASSWORD} --tenant ${INPUT_TENANT}
+az login --service-principal --username "${INPUT_SERVICE_PRINCIPAL}" --password "${INPUT_SERVICE_PRINCIPAL_PASSWORD}" --tenant "${INPUT_TENANT}"
 
 echo "Sending build job to ACR.."
-az acr build -r ${INPUT_REGISTRY} ${BUILD_ARGS} -f ${INPUT_DOCKERFILE} -t ${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG} "${BUILD_URI}"
+az acr build --registry "${INPUT_REGISTRY}" ${BUILD_ARGS} --file "${INPUT_DOCKERFILE}" --image "${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG}" "${BUILD_URI}"
