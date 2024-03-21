@@ -41,6 +41,9 @@ inputs:
   build_args:
     description: "JSON specifying key=value pairs as as Docker build arguments"
     required: false
+  platform:
+    description: "The platform where build/task is run"
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"

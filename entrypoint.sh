@@ -24,8 +24,14 @@ else
         BUILD_URI="https://${GIT_ACCESS_TOKEN_FLAG}github.com/${GITHUB_REPOSITORY}.git#${INPUT_BRANCH}:${INPUT_FOLDER}"
 fi
 
+if [ -n "$INPUT_PLATFORM"]; then
+        PLATFORM_ARG="--platform ${INPUT_PLATFORM}"
+else
+        PLATFORM_ARG=""
+fi
+
 echo "Logging into azure.."
 az login --service-principal --username "${INPUT_SERVICE_PRINCIPAL}" --password "${INPUT_SERVICE_PRINCIPAL_PASSWORD}" --tenant "${INPUT_TENANT}"
 
 echo "Sending build job to ACR.."
-az acr build --registry "${INPUT_REGISTRY}" ${BUILD_ARGS} --file "${INPUT_DOCKERFILE}" --image "${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG}" "${BUILD_URI}"
+az acr build --registry "${INPUT_REGISTRY}" ${BUILD_ARGS} --file "${INPUT_DOCKERFILE}" --image "${INPUT_REPOSITORY}${IMAGE_PART}:${INPUT_TAG}" "${BUILD_URI}" $PLATFORM_ARG

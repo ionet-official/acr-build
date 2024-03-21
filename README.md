@@ -99,6 +99,12 @@ Following the capabilities of this action:
     <td></td>
   </tr>
 
+  <tr>
+    <td><code>platform</code><br/></td>
+    <td>(Optional) The platform where build/task is run </td>
+    <td></td>
+  </tr>
+
 </table>
 
 ## Example usage
